@@ -6,7 +6,6 @@ module.exports.index = (request, response) => {
     });
 }
 
-
 module.exports.createPerson = (request, response) => {
     const { firstName, lastName, age, email } = request.body; // get the body of the requests
     Person.create({
@@ -16,7 +15,7 @@ module.exports.createPerson = (request, response) => {
         email
     })
         .then(person => response.json(person)) // person is the new person
-        .catch(err => response.json(err)); // err is the error
+        .catch(err => response.status(400).json(err)); // err is the error
 }
 
 module.exports.getAllPeople = (request, response) => { // get all people

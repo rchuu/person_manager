@@ -20,20 +20,13 @@ const Dashboard = (props) => {
             .catch(err => console.log("Error", err));
     }, [])
 
-    const removeFromDom = personId => {
-        setPeople(people.filter(person => person._id !== personId)); // making a call back, this will remove the person from the dom
-    }
-    // const createPerson = people => {
-    //     axios.post('http://localhost:8000/api/people', people) // create a new person
-    //         .then(res => {
-    //             setPeople([...people, res.data])// this will add the new person to the dom
-    //             // navigate('/')
-    //         })
-    // }
-
     return (
         <div className="m-5 p-5">
-            {loaded && <PersonList people={people} removeFromDom={removeFromDom} />}
+            {
+                loaded ?
+                    <PersonList people={people} setPeople={setPeople} />
+                    : <div>loading</div>
+            }
             <Link to={'/people/create'} className="btn btn-primary">Add</Link>
         </div>
         //if loaded is true, render PersonList

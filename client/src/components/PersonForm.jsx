@@ -4,11 +4,11 @@ import axios from 'axios';
 const PersonForm = (props) => {
     const { firstName, lastName, age, email, handleSubmitProp, setFirstName, setLastName, setAge, setEmail } = props;
 
-    // const [firstName, setFirstName] = useState(initialFirstName);
-    // const [lastName, setLastName] = useState(initialLastName);
-    // const [age, setAge] = useState(initialAge);
-    // const [email, setEmail] = useState(initialEmail);
-    // const handleSubmit = (e) => {
+    // const [firstName, setFirstName] = useState("");
+    // const [lastName, setLastName] = useState("");
+    // const [age, setAge] = useState("");
+    // const [email, setEmail] = useState("");
+    // const handleSubmitProp = (e) => {
     //     e.preventDefault();
     //     handleSubmitProp({ firstName, lastName, age, email });
     // }
