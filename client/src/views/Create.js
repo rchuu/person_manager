@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PersonForm from '../components/PersonForm';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Create = (props) => {
 
@@ -11,6 +11,7 @@ const Create = (props) => {
     const [lastName, setLastName] = useState('');
     const [age, setAge] = useState('');
     const [email, setEmail] = useState('');
+    const [errors, setErrors] = useState([]);
 
     const createPerson = (e) => {
         e.preventDefault();
@@ -27,12 +28,23 @@ const Create = (props) => {
                 setEmail('');
                 navigate('/');
             })
-            .catch(err => console.log("Error", err));
+            .catch(err => {
+                const errorResponse = err.response.data.errors;
+                const errorArr = [];
+                for (const key of Object.keys(errorResponse)) { // loop through the keys of the errorResponse object
+                    errorArr.push(errorResponse[key].message) // errorResponse[key].message is the error message
+                }
+                // ("Error", err);
+                setErrors(errorArr);
+            });
     }
 
     return (
-        <div>
+        <div className="m-5 p-5">
+            <h1>Create a Person</h1>
+            {errors.map((err, index) => <p key={index}>{err}</p>)}
             <PersonForm handleSubmitProp={createPerson} setFirstName={setFirstName} setLastName={setLastName} setAge={setAge} setEmail={setEmail} />
+            <Link to={'/'} className="btn btn-primary">Back</Link>
         </div>
     )
 }
